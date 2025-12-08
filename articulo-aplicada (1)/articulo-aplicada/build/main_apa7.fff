@@ -1,0 +1,18 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/diagrama_capas.pdf}
+    \caption{Diagrama de arquitectura por capas implementada en el sistema.}
+    \label{fig:diagrama_capas}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/reduccion_errores.pdf}
+    \caption{Reducción de errores en producción tras aplicar arquitectura por capas.}
+    \label{fig:reduccion_errores}
+\end{figure*}

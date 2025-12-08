@@ -1,0 +1,18 @@
+\section{Resultados}
+El uso de una arquitectura por capas y la aplicación de principios de modularidad y servicios en el proyecto “Experiencias Significativas” permitió observar mejoras claras en la organización y mantenibilidad del sistema.
+
+\begin{itemize}
+    \item \textbf{Claridad y orden}: La separación en controladores, servicios, repositorios y entidades facilitó la comprensión y el mantenimiento del código.
+    \item \textbf{Facilidad para agregar nuevas funcionalidades}: Gracias a la modularidad, fue posible extender el sistema sin afectar otras partes.
+    \item \textbf{Reducción de errores}: La estructura clara ayudó a detectar y corregir errores rápidamente.
+    \item \textbf{Escalabilidad}: El sistema quedó preparado para crecer y adaptarse a nuevas necesidades.
+\end{itemize}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/reduccion_errores.pdf}
+    \caption{Reducción de errores en producción tras aplicar arquitectura por capas.}
+    \label{fig:reduccion_errores}
+\end{figure}
+
+Por ejemplo, al implementar nuevas formas de visualización de actividades, solo fue necesario modificar el componente correspondiente, sin afectar la lógica de negocio ni la base de datos. Además, la comunicación entre servicios permitió integrar futuras funcionalidades como reportes automáticos o análisis de datos.

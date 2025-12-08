@@ -1,0 +1,41 @@
+\section{Implementación del software}
+El sistema "Experiencias Significativas" se implementó siguiendo una arquitectura por capas que separa las responsabilidades y facilita el mantenimiento del código.
+
+\subsection{Arquitectura del sistema}
+La arquitectura implementada organiza el código en capas claramente definidas: controladores para manejar las peticiones, servicios para la lógica de negocio, repositorios para el acceso a datos, y entidades para representar los modelos del dominio.
+
+\subsection{Fragmento de código}
+Ejemplo de implementación de una función con tipado estático:
+
+\ifminted
+\begin{minted}[linenos]{python}
+def suma(a: int, b: int) -> int:
+    """Suma dos numeros enteros.
+    
+    Args:
+        a: Primer operando
+        b: Segundo operando
+        
+    Returns:
+        La suma de a y b
+    """
+    return a + b
+\end{minted}
+\else
+\begin{lstlisting}[language=Python]
+def suma(a: int, b: int) -> int:
+    """Suma dos numeros enteros.
+    
+    Args:
+        a: Primer operando
+        b: Segundo operando
+        
+    Returns:
+        La suma de a y b
+    """
+    return a + b
+\end{lstlisting}
+\fi
+
+\subsection{Tecnologías utilizadas}
+La selección de tecnologías se basó en criterios de escalabilidad, mantenibilidad y facilidad de uso, priorizando herramientas que facilitaran la implementación de la arquitectura por capas.

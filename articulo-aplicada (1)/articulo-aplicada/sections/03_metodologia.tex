@@ -1,0 +1,21 @@
+\section{Desarrollo}
+\subsection{Aplicación de los conceptos en el proyecto “Experiencias Significativas”}
+	extbf{1. Arquitectura por Capas en el Backend}
+
+Una de las decisiones más importantes fue la implementación de una arquitectura por capas en el backend, siguiendo buenas prácticas que destacan la necesidad de una estructura interna y organizada.
+
+El sistema se construyó con diferentes niveles:
+\begin{itemize}
+    \item \textbf{Controladores}: reciben las solicitudes de los usuarios y envían una respuesta.
+    \item \textbf{Servicios}: donde se conecta la lógica de negocio, es decir, las reglas que dan el funcionamiento del sistema.
+    \item \textbf{Repositorios}: responsables de comunicarse con la base de datos y garantizar que la información fluya de manera clara y eficiente.
+    \item \textbf{Entidades}: permiten manejar los datos de manera ordenada y coherente, evitando confusiones y facilitando la interacción entre capas.
+\end{itemize}
+Esto asegura que el sistema sea más claro, fácil de mantener y preparado para crecer en el futuro.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/diagrama_capas.pdf}
+    \caption{Diagrama de arquitectura por capas implementada en el sistema.}
+    \label{fig:diagrama_capas}
+\end{figure}

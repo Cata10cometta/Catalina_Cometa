@@ -1,0 +1,19 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[1] Config.pm:331> INFO - Logfile is 'build/main_apa7.blg'
+[82] biber:342> INFO - === Mon Dec  8, 2025, 19:48:05
+[110] Biber.pm:421> INFO - Reading 'build/main_apa7.bcf'
+[196] Biber.pm:1002> INFO - Found 8 citekeys in bib section 0
+[218] Biber.pm:4487> INFO - Processing section 0
+[228] Biber.pm:4678> INFO - Looking for bibtex file 'bibliography/references.bib' for section 0
+[243] bibtex.pm:1713> INFO - LaTeX decoding ...
+[259] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography/references.bib'
+[372] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[373] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[373] Biber.pm:4307> INFO - Sorting list 'apa/apasortcite//global/global/global' of type 'entry' with template 'apa' and locale 'es-ES'
+[395] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[396] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[397] Biber.pm:4307> INFO - Sorting list 'apa/global//global/global/global' of type 'entry' with template 'apa' and locale 'es-ES'
+[405] bbl.pm:676> INFO - Writing 'build/main_apa7.bbl' with encoding 'UTF-8'
+[447] bbl.pm:779> INFO - Output to build/main_apa7.bbl
+[449] Biber.pm:132> WARN - legacy month field 'September' in entry 'navarro2017integracion' is not an integer - this will probably not sort properly.
+[450] Biber.pm:134> INFO - WARNINGS: 1

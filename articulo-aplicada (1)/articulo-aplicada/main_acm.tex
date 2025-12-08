@@ -1,0 +1,38 @@
+\documentclass[sigconf,nonacm]{acmart}
+
+\input{includes/preamble_common}
+\input{includes/preamble_acm}
+
+\AtBeginDocument{\providecommand\BibTeX{{\sc Bib}\TeX}}
+
+\title[Arquitectura de Software]{Arquitectura de Software en el proyecto Experiencias Significativas}
+
+\author{Catalina Cometa Fierro}
+\affiliation{%
+  \institution{SENA}
+  \city{Neiva, Huila}
+  \country{Colombia}}
+\email{catalina.cometa@soy.sena.edu.co}
+
+\begin{abstract}
+\input{sections/00_abstract}
+\end{abstract}
+
+\keywords{arquitectura de software, capas, servicios, modularidad, experiencias significativas}
+
+\begin{document}
+\maketitle
+
+\input{sections/01_introduccion}
+\input{sections/02_relacionados}
+\input{sections/03_metodologia}
+\input{sections/04_implementacion}
+\input{sections/05_resultados}
+\input{sections/06_discusion}
+\input{sections/07_conclusiones}
+\input{sections/A1_apendices}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliography/references}
+
+\end{document}
