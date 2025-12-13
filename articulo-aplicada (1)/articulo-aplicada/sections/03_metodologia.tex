@@ -1,21 +1,230 @@
-\section{Desarrollo}
-\subsection{Aplicación de los conceptos en el proyecto “Experiencias Significativas”}
-	extbf{1. Arquitectura por Capas en el Backend}
 
-Una de las decisiones más importantes fue la implementación de una arquitectura por capas en el backend, siguiendo buenas prácticas que destacan la necesidad de una estructura interna y organizada.
+1. Arquitectura por Capas en el Backend. 
 
-El sistema se construyó con diferentes niveles:
-\begin{itemize}
-    \item \textbf{Controladores}: reciben las solicitudes de los usuarios y envían una respuesta.
-    \item \textbf{Servicios}: donde se conecta la lógica de negocio, es decir, las reglas que dan el funcionamiento del sistema.
-    \item \textbf{Repositorios}: responsables de comunicarse con la base de datos y garantizar que la información fluya de manera clara y eficiente.
-    \item \textbf{Entidades}: permiten manejar los datos de manera ordenada y coherente, evitando confusiones y facilitando la interacción entre capas.
-\end{itemize}
-Esto asegura que el sistema sea más claro, fácil de mantener y preparado para crecer en el futuro.
+Una decisión arquitectónica vital para "Experiencias Significativas", fue la implementacion de arquitectura por capas en el backend. Esa estructura, facilita separar las tareas del sistema de manera clara, haciéndolo mucho mas facil de desarrollar y mantener, con el tiempo.
 
-\begin{figure}[!ht]
+En esta arquitectura, cada capa con su función definida se comunica jerárquicamente. Para este proyecto, tenemos cinco capas centrales: controladores, servicios, repositorios, entidades y utilidades.
+
+Controladores: Reciben las peticiones del usuario, y despues responden. Actúan como una interfaz entre el frontend y el backend, verdad? Su tarea consiste en procesar peticiones HTTP, validando entradas, y pasando información a los servicios para su procesamiento. Tambien gestionan la respuesta al cliente.
+
+Servicios: administran la lógica de negocios del sistema, o sea. El comportamiento del sistema: Esto explica el funcionamiento, abarcando reglas, validaciones, interacciones, y los procesos que se desencadenan ante acciones del usuario. Servicios, independientes de controladores y repositorios, promueven modularidad y reutilización; súper útil eso. Servicios reutilizables entre varios controladores y otros servicios, incrementan la eficiencia y escalabilidad.
+
+Repositorios: Ellos se encargan de comunicarse con la base de datos. Abstraen las consultas, aseguran un acceso rápido y consistente. Minimizan la lógica repetitiva en los controladores y servicios, centralizando los datos.
+Auxilia en escalabilidad y adaptación del proyecto, ¡bastante bueno!
+
+Las entidades: representan los objetos de datos del sistema, claro. En cuanto al proyecto "Experiencias Significativas", imaginamos las entidades como guardadas experiencias educativas, igual que usuarios, valoraciones y demás datos importántes. De esta forma, con entidades bien definidas, aseguramos el flujo de información a través del sistema, ordenadito. Igualmente, las entidades ayudan a gestionar los datos de manera ordenada, reduciendo errores y líos con la base de datos, menos mal.
+
+Constructores
+
+Dentro de esta carpeta, encontramos agrupados los componentes responsables de la creación de objetos complejos y también preparar respuestas concretas, antes de pasarlas a otras capas.
+
+Los Constructores usualmente son útiles para:
+Generar DTOs desde las entidades.
+Unificar las estructuras de respuesta.
+Mapear datos a modelos más sencillos.
+Armar objetos esenciales para un procedimiento.
+Ellos operan como una capa intermedia para, ya ves, mantener el código limpio y todo bien ordenado.
+
+
+Utilities
+Esta carpeta incluye herramientas y funciones auxiliares que pueden usarse en diferentes partes del sistema.
+Aquí pueden existir:
+• Helpers
+• Extensiones
+• Validaciones comunes
+• Formateadores
+• Manejo de fechas
+• Conversores
+• Funciones de apoyo generales
+Son elementos reutilizables que ayudan a evitar duplicar código.
+
+La implementación de esta arquitectura en capas asegura una comprensión, un mantenimiento y una expansión sencillas del sistema. Además, se fomenta la modularidad del sistema, o sea, cada parte puede modificarse, mejorarse o sustituirse por separado sin trastornar al resto.
+
+1. Uso de Servicios para la Comunicación entre Componentes
+
+Escalabilidad y flexibilidad, un pilar fundamental en este proyecto, dependió crucialmente de los servicios. Facilitando la comunicación entre los componentes del sistema, se volvió imprescindible. Esencialmente, estos servicios encapsulan la lógica empresarial, si sabes lo que quiero decir. También simplifican las pruebas, el mantenimiento y la expansión, tremendo!
+
+El proyecto "Experiencias Significativas" vio estos servicios implementados, sí, con una arquitectura RESTful API. Las diversas partes del sistema se comunicaron con gran eficiencia. Cada servicio, cuidadosamente diseñado, cumplió una función singular, una maravilla! Usando APIs para un intercambio de datos, ¡que maravilla! La escalabilidad fue el punto más alto, con servicios distribuidos independientemente, en servidores o incluso en la nube... depende, como es necesario, vaya.
+
+2.  Diseño Orientado a Componentes en el Frontend
+
+En el desarrollo frontend, el diseño orientado a componentes fue aplicado. Este enfoque permite edificar interfaces de usuario, UI, modularmente, facilitando así la reutilización y su mantenimiento, por supuesto. Los componentes son trozos independientes y reutilizables de la interfaz, botones, formularios, tablas, paneles informativos, por ejemplo. Cada uno de ellos posee su propia lógica, su estado, también su estilo, cosa que ayuda a probar, mantener, y modificar, digamos, porciones específicas sin que el sistema entero se vea afectado.
+
+Pa' la UI, se usó un framework moderno, tipo React, súper adecuado para este diseño modular y orientado a componentes. Cada componente React es autónomo, osea, puede usarse en diferentes partes de la aplicación, sin duplicar código.
+
+Este enfoque no sólo mejora la eficiencia del desarrollo, sino que además asegura una aplicación más escalable, y fácilmente extensible.
+Aquí tienes la respuesta:
+
+Aun más, impulsa una experiencia de usuario que siempre es la misma, los elementos se pueden reutilizar en otras partes de la plataforma. Tambien, fomenta la misma experienza de usario, por lo que los componentes son usados de nuevo en diversas secciones en la plataforma.
+
+
+3. Patrones de Diseño Aplicados en el Proyecto
+
+Para asegurar la escalabilidad, y asi mantener el proyecto "Experiencias Significativas", se emplearon diversos y claves patrones de diseño de ingeniería de software. Utilizando estos patrones de diseño, se logró un código mucho mas limpio, bien ordenado, y siguiendo buenas practicas recomendadas.
+
+3.1 Repository Pattern
+
+El Patrón Repository se emplea para empaquetar la lógica de acceso a datos, un rol centralizado para las operaciones sobre las entidades. Con este patrón, mirá lo que pasa:
+
+La lógica de negocio se separa del acceso a datos
+El código es más fácil de probar, algo muy útil.
+El sistema puede cambiar de motor de base de datos sin alterar la capa de servicios.
+Las consultas se encapsulan.
+
+En el proyecto, cada entidad clave (Experiencia Usuario Institución Evaluación…etc) tiene su propio repositorio encargado de gestionar:
+• Inserciones
+• Consultas
+• Actualizaciones
+• Eliminaciones
+
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.48\textwidth]{graphics/diagrama_capas.pdf}
-    \caption{Diagrama de arquitectura por capas implementada en el sistema.}
-    \label{fig:diagrama_capas}
+    \includegraphics[width=0.48\textwidth]{graphics/dao_factura.png}
+    \caption{Ejemplo de patrón Repository: clase FacturaDAO gestionando operaciones sobre la tabla Facturas.}
 \end{figure}
+
+
+
+3.1 Patrón Factory
+
+El patrón Factory, se usó en situaciones donde la creación de objetos complejos necesitaba ser controlada o, al decidir cual tipo de objeto crear, dependía de una condición.
+
+Este patrón permitía algunas cosas:
+Centralizar la creacion de objetos.
+Evitar el exceso de 'new'.
+Minimizar el acoplamiento entre clases.
+Instanciar clases específicas, basadas en reglas de negocio.
+
+Se utilizaba mucho para construir respuestas, DTOs o servicios especificos, eso dependía del flujo.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/logistica.png}
+    \caption{Analogía visual: logística terrestre y marítima como ejemplo de factorías que crean objetos según el contexto.}
+\end{figure}
+
+
+3.2 Patrón Builder
+
+El patrón Builder resultó vital, ¡indispensable! al edificar objetos intrincados, con énfasis en:
+
+La creación de DTOs
+El mapeo de entidades, nada fácil
+Construir respuestas personalizadas para la API, ¿comprendes?
+La formación de estructuras para reportes o evaluaciones, así mismo
+
+Este patrón asevera la claridad del código y elude los constructores grandísimos, ¡qué lío!, con montones de parámetros.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/unitofwork.png}
+    \caption{Patrón UnitOfWork: coordinación de repositorios y transacciones en la arquitectura.}
+\end{figure}
+
+
+La carpeta Builders, ubicada dentro del backend, exhibe esta práctica, donde cada builder fue designado para generar objetos concretos, sin agobiar a los constructores clásicos.
+
+3.3 Patrón UnitOfWork:
+
+El patrón UnitOfWork se utilizó, para administrar transacciones en la base de datos, sí.
+
+Con este patrón se logran muchas cosas:
+
+Se llevan a cabo varias operaciones, ¡en una sola transacción!
+Si algo sale mal, ¡todo el proceso se deshace!, eh.
+Se coordina el trabajo entre variados repositorios.
+Impide inconsistencias, ¡en la base de datos, claro!
+
+En este proyecto, UnitOfWork hace de orquestrador, entre repositorios. Facilitando la ejecución segura de operaciones encadenadas: como crear una experiencia, subir documentos y también, registrar evaluaciones.
+
+
+4. Principios SOLID utilizados en el proyecto Experiencias Significativas
+
+4.1 SRP Principio de Responsabilidad Única.
+
+Definición:
+Cada clase o modulo debería tener una sola razón por la cual modificarse, osea, solo una responsabilidad o propósito.
+
+La segregación en directorios API (controladores) Service Repository Entity Builders Utilities nos muestra que cada nivel tiene tareas específicas entrada HTTP, lógica de negocio, acceso a datos, modelado, construccion de objetos, y apoyos transversales. Ahí se encuentra el SRP a nivel de organización.
+
+Ejemplo:
+public class ExperienceController 
+    : BaseModelController<Experience, ExperienceDTO, ExperienceRequest>
+
+El ExperienceController respeta el principio de responsabilidad única; Su tarea principal, atender solicitudes HTTP, y traspasa la lógica de negocio a la capa de servicios. No incluye lógica complicada, ni tampoco reglas del dominio lo cuál simplifica su mantenimiento, además reduce el acoplamiento.
+
+
+4.2 OCP — Principio Abierto/Cerrado
+
+Definición:
+Las entidades de software como clases, módulos o funciones deberian ser abiertas para la extensión pero cerradas a modificación. Esto significa extender el comportamiento sin tener que tocar código ya escrito.
+
+Empleo de interfaces (IService, IRepository), además patrones como factory y builder y la arquitectura por capas ayudan a incluir implementaciones nuevas (ejemplo cambiar el proveedor de almacenamiento o de envio de correos) sin modificar los que ya usan esas funcionalidades.
+
+Ejemplo:
+namespace Utilities.Email.Interfaces
+{
+    public interface IEmailService
+    {
+        Task SendExperiencesEmail(string emailReceptor, string recoveryCode);
+    }
+}
+
+El principio Abierto/Cerrado (OCP) se manifiesta en la interfaz IEmailService, una pieza clave que establece un contrato firme para el envío de correos electrónicos. Mediante esta abstracción, el envío de correos es ampliable con nuevas implementaciones (incluyendo otros proveedores) sin tocar el código actual. Esta forma asegura una arquitectura adaptable, simplifica el mantenimiento, y ayuda al sistema a evolucionar sin quebrantar su estabilidad.
+
+
+4.3 LSP el Principio de Sustitución de Liskov.
+
+Definición claro,
+Si S es subtipo de T, pues los objetos tipo T, podrán ser substituidos con los objetos tipo S sin afectar las propiedades buenas del programa, digamos su tarea o corrección, y más.
+
+Marcas en su repositorio.
+El esquema de interfaces y repositorios, muestra implementaciones intercambiables tipo IExperienceRepository con ExperienceRepository, es obvio. Cumpliendo los contratos las implementaciones, no cambian su comportamiento esperado. Asi se respeta LSP.
+
+Ejemplo:
+public interface IExperienceRepository 
+    : IBaseModelRepository<Experience, ExperienceDTO, ExperienceRequest>
+Gracias a la correcta aplicación del principio LSP, el sistema mantiene una jerarquía de repositorios coherente, en cual, las implementaciones específicas respetan los contratos base; esto, evitando errores inesperados y facilitando la reutilización y escalabilidad del código.
+
+
+4.4 ISP Principio de Segregación de Interfaces
+
+Definición
+Una interfaz, ella no debería obligar a implementar métodos, que el cliente no los precisa. Mejor tener interfaces, pequeñas y específicas.
+
+Señales en el repositorio
+La carpeta Repository, con muchísimas interfaces por entidad, da a entender que cada repositorio tiene su propia interface como (IUserRepository, IExperienceRepository) en lugar de una única interfaz gigantesca.
+
+Ejemplo:
+public interface IUserRepository 
+    : IBaseModelRepository<User, UserDTO, UserRequest>
+
+Allí se concreta el ISP debido a lo siguiente:
+
+No empleas un repositorio general para todo.
+Diseñas una interfaz hecha solo para usuarios.
+Tan solo guarda métodos lógicos para el User.
+
+Ninguna otra entidad es forzada a usar estos métodos.
+
+El principio de segregación de interfaces ISP resalta en el diseño del repositorio de usuarios IUserRepository.
+
+
+4.5 DIP — Principio de Inversión de Dependencias
+
+Definición
+Es que módulos más importantes no deben depender de los que son menos importantes; es decir, todos dependen de abstracciones. Las abstracciones, ellas, no necesitan depender de nada específico; lo concreto, ¡eso sí! debe depender de las abstracciones.
+
+Señales en tu repositorio
+Si ves cosas como IRepository, IService, y usas inyección de dependencias (se asume), eso apunta a DIP: tus servicios, los importantes, usan interfaces (o abstracciones) y las implementaciones –repositorios, almacenamiento, correos– las das después, en marcha.
+
+Ejemplo:
+namespace Utilities.Email.Interfaces
+{
+    public interface IEmailService
+    {
+        Task SendExperiencesEmail(string emailReceptor, string recoveryCode);
+    }
+}
+
+La Inversión de Dependencias (DIP) se muestra con la interfaz IEmailService, una abstracción clave. Ésta conecta servicios de alto nivel con métodos de envío concretos de correos. Los módulos esenciales dependen de esta interfaz, no de clases específicas, por ello, el proveedor de correo se sustituye sin tocar la lógica de negocio. Asi, la inversion mejora la flexibilidad, las pruebas resultan más sencillas, y el sistema se desacopla.

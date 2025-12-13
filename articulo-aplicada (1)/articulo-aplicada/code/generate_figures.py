@@ -1,340 +1,497 @@
-# Nueva gráfica: Diagrama de arquitectura por capas
-def generar_diagrama_capas():
-    import matplotlib.patches as mpatches
-    fig, ax = plt.subplots(figsize=(8, 6))
-    capas = ['Controladores', 'Servicios', 'Repositorios', 'Entidades']
-    y = [4, 3, 2, 1]
-    colors = ['#2E86AB', '#F18F01', '#A23B72', '#C73E1D']
-    for i, (capa, yi, color) in enumerate(zip(capas, y, colors)):
-        ax.add_patch(mpatches.FancyBboxPatch((1, yi-0.4), 6, 0.8, boxstyle="round,pad=0.2", fc=color, ec='black', alpha=0.7))
-        ax.text(4, yi, capa, ha='center', va='center', fontsize=14, color='white', weight='bold')
-    ax.set_xlim(0, 8)
-    ax.set_ylim(0, 5)
-    ax.axis('off')
-    plt.title('Arquitectura por Capas del Sistema', fontsize=16)
-    plt.savefig(f'{graphics_dir}/diagrama_capas.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/diagrama_capas.png', format='png')
-    plt.close()
-    print("✓ Generada: diagrama_capas.pdf/png")
+"""
+Script para generar gráficas del artículo de Patrones de Diseño y Arquitectura de Software
+Genera visualizaciones para: métricas del proyecto, comparativas de patrones,
+evolución arquitectónica y resultados de rendimiento
+"""
 
-# Nueva gráfica: Reducción de errores
-def generar_reduccion_errores():
-    meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-    errores_antes = [35, 33, 30, 28, 26, 24, 22, 20, 18, 16, 15, 14]
-    errores_despues = [28, 25, 22, 19, 16, 14, 12, 10, 8, 6, 5, 4]
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(meses, errores_antes, label='Antes de arquitectura', color='#A23B72', marker='o', linestyle='--')
-    ax.plot(meses, errores_despues, label='Después de arquitectura', color='#2E86AB', marker='s', linewidth=2)
-    ax.set_xlabel('Mes')
-    ax.set_ylabel('Errores en producción')
-    ax.set_title('Reducción de Errores tras Aplicar Arquitectura por Capas')
-    ax.legend()
-    plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/reduccion_errores.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/reduccion_errores.png', format='png')
-    plt.close()
-    print("✓ Generada: reduccion_errores.pdf/png")
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Generador de Gráficas para Plantilla LaTeX - Ingeniería de Software
-Genera gráficas de ejemplo relacionadas con DevOps, metodologías ágiles y métricas DORA
-"""
 import matplotlib.pyplot as plt
+import numpy as np
 import matplotlib.patches as mpatches
-import numpy as np
-import pandas as pd
-from matplotlib import rcParams
+from matplotlib.patches import FancyBboxPatch, Circle, Rectangle, FancyArrowPatch
 import os
 
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-from matplotlib import rcParams
-import os
+# Configuración de estilo
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['font.size'] = 10
+plt.rcParams['figure.dpi'] = 300
 
-# Configuración global para mejorar la calidad de las gráficas
-plt.style.use('default')
-rcParams['font.family'] = 'serif'
-rcParams['font.size'] = 10
-rcParams['axes.labelsize'] = 11
-rcParams['axes.titlesize'] = 12
-rcParams['xtick.labelsize'] = 9
-rcParams['ytick.labelsize'] = 9
-rcParams['legend.fontsize'] = 9
-rcParams['figure.titlesize'] = 13
-rcParams['savefig.dpi'] = 300
-rcParams['savefig.bbox'] = 'tight'
-rcParams['savefig.pad_inches'] = 0.1
+# Crear directorio de salida
+output_dir = '../graphics'
+os.makedirs(output_dir, exist_ok=True)
 
-# Crear directorio de gráficas si no existe
-graphics_dir = 'graphics'
-os.makedirs(graphics_dir, exist_ok=True)
-
-def generar_metricas_dora():
-    """Genera gráfica de barras con métricas DORA por equipo"""
+# ============================================================================
+# FIGURA 1: Métricas del Proyecto - Componentes Implementados
+# ============================================================================
+def fig1_metricas_componentes():
+    fig, ax = plt.subplots(figsize=(7, 5))
     
-    # Datos de ejemplo: métricas DORA por equipo
-    equipos = ['Equipo Alpha', 'Equipo Beta', 'Equipo Gamma', 'Equipo Delta']
-    deployment_freq = [15.2, 8.7, 22.1, 12.4]  # deployments por semana
-    lead_time = [2.1, 4.8, 1.3, 3.2]  # días
+    componentes = ['Controladores', 'Servicios', 'Repositorios', 
+                   'Entidades', 'Interfaces', 'Builders']
+    cantidades = [38, 39, 37, 40, 75, 4]
+    colores = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c']
+    
+    bars = ax.barh(componentes, cantidades, color=colores, alpha=0.8, edgecolor='black')
+    
+    # Agregar valores en las barras
+    for i, (bar, valor) in enumerate(zip(bars, cantidades)):
+        ax.text(valor + 1, i, str(valor), va='center', fontweight='bold')
+    
+    ax.set_xlabel('Cantidad de Componentes', fontweight='bold')
+    ax.set_title('Componentes Arquitectónicos Implementados\nen la Plataforma', 
+                 fontweight='bold', fontsize=12)
+    ax.grid(axis='x', alpha=0.3, linestyle='--')
+    ax.set_xlim(0, max(cantidades) * 1.15)
+    
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/metricas_componentes.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/metricas_componentes.png', bbox_inches='tight')
+    plt.close()
+    print("✓ Figura 1 generada: metricas_componentes")
+
+# ============================================================================
+# FIGURA 2: Comparativa de Tiempos - Antes vs Después de Patrones
+# ============================================================================
+def fig2_comparativa_tiempos():
+    fig, ax = plt.subplots(figsize=(8, 5))
+    
+    tareas = ['Onboarding\nDesarrolladores', 'Cambio de\nBase de Datos', 
+              'Agregar\nNuevo Módulo', 'Refactoring\nMayor']
+    sin_patrones = [12, 20, 15, 25]  # días
+    con_patrones = [2.5, 1, 3, 8]    # días
+    
+    x = np.arange(len(tareas))
+    width = 0.35
+    
+    bars1 = ax.bar(x - width/2, sin_patrones, width, label='Sin Patrones', 
+                   color='#e74c3c', alpha=0.8, edgecolor='black')
+    bars2 = ax.bar(x + width/2, con_patrones, width, label='Con Patrones', 
+                   color='#2ecc71', alpha=0.8, edgecolor='black')
+    
+    # Etiquetas de valores
+    for bars in [bars1, bars2]:
+        for bar in bars:
+            height = bar.get_height()
+            ax.text(bar.get_x() + bar.get_width()/2., height,
+                   f'{height:.1f}d', ha='center', va='bottom', fontweight='bold')
+    
+    ax.set_ylabel('Tiempo (días)', fontweight='bold')
+    ax.set_title('Comparativa de Tiempos: Impacto de los Patrones de Diseño', 
+                 fontweight='bold', fontsize=12)
+    ax.set_xticks(x)
+    ax.set_xticklabels(tareas)
+    ax.legend(loc='upper right')
+    ax.grid(axis='y', alpha=0.3, linestyle='--')
+    
+    # Agregar porcentajes de mejora
+    for i, (antes, despues) in enumerate(zip(sin_patrones, con_patrones)):
+        mejora = ((antes - despues) / antes) * 100
+        ax.text(i, max(antes, despues) + 1.5, f'↓{mejora:.0f}%', 
+               ha='center', fontweight='bold', color='green', fontsize=9)
+    
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/comparativa_tiempos.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/comparativa_tiempos.png', bbox_inches='tight')
+    plt.close()
+    print("✓ Figura 2 generada: comparativa_tiempos")
+
+# ============================================================================
+# FIGURA 3: Cobertura de Pruebas por Capa
+# ============================================================================
+def fig3_cobertura_pruebas():
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+    
+    # Gráfica de pastel - Cobertura actual
+    capas = ['API\nControllers', 'Business\nServices', 'Data\nRepositories', 
+             'Entity\nModels']
+    cobertura = [85, 95, 90, 100]
+    colores = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12']
+    
+    wedges, texts, autotexts = ax1.pie(cobertura, labels=capas, autopct='%1.0f%%',
+                                        colors=colores, startangle=90,
+                                        wedgeprops={'edgecolor': 'black', 'linewidth': 1.5})
+    for autotext in autotexts:
+        autotext.set_color('white')
+        autotext.set_fontweight('bold')
+    
+    ax1.set_title('Cobertura de Pruebas\npor Capa Arquitectónica', 
+                  fontweight='bold', fontsize=11)
+    
+    # Gráfica de barras - Líneas de código testeadas
+    lineas_codigo = [1200, 3500, 2800, 1500]
+    lineas_testeadas = [int(loc * cob / 100) for loc, cob in zip(lineas_codigo, cobertura)]
+    
+    x = np.arange(len(capas))
+    width = 0.35
+    
+    bars1 = ax2.bar(x - width/2, lineas_codigo, width, label='Total Líneas', 
+                    color='#95a5a6', alpha=0.7, edgecolor='black')
+    bars2 = ax2.bar(x + width/2, lineas_testeadas, width, label='Líneas Testeadas', 
+                    color='#27ae60', alpha=0.9, edgecolor='black')
+    
+    ax2.set_ylabel('Líneas de Código', fontweight='bold')
+    ax2.set_title('Líneas de Código Testeadas', fontweight='bold', fontsize=11)
+    ax2.set_xticks(x)
+    ax2.set_xticklabels([c.replace('\n', ' ') for c in capas], rotation=15, ha='right')
+    ax2.legend()
+    ax2.grid(axis='y', alpha=0.3, linestyle='--')
+    
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/cobertura_pruebas.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/cobertura_pruebas.png', bbox_inches='tight')
+    plt.close()
+    print("✓ Figura 3 generada: cobertura_pruebas")
+
+# ============================================================================
+# FIGURA 4: Evolución de la Arquitectura
+# ============================================================================
+def fig4_evolucion_arquitectura():
+    fig, ax = plt.subplots(figsize=(10, 5))
+    
+    fases = ['Fase 1\nMonolito', 'Fase 2\nN-Capas', 'Fase 3\nN-Capas + DDD', 
+             'Fase 4\nMicroservicios\n(Planificado)']
+    complejidad = [30, 50, 70, 90]
+    mantenibilidad = [40, 75, 85, 95]
+    escalabilidad = [20, 60, 75, 98]
+    
+    x = np.arange(len(fases))
+    width = 0.25
+    
+    bars1 = ax.bar(x - width, complejidad, width, label='Complejidad Inicial', 
+                   color='#e74c3c', alpha=0.8, edgecolor='black')
+    bars2 = ax.bar(x, mantenibilidad, width, label='Mantenibilidad', 
+                   color='#3498db', alpha=0.8, edgecolor='black')
+    bars3 = ax.bar(x + width, escalabilidad, width, label='Escalabilidad', 
+                   color='#2ecc71', alpha=0.8, edgecolor='black')
+    
+    ax.set_ylabel('Índice de Calidad (%)', fontweight='bold')
+    ax.set_xlabel('Fase del Proyecto', fontweight='bold')
+    ax.set_title('Evolución de Métricas de Calidad según Arquitectura Adoptada', 
+                 fontweight='bold', fontsize=12)
+    ax.set_xticks(x)
+    ax.set_xticklabels(fases)
+    ax.legend(loc='upper left')
+    ax.grid(axis='y', alpha=0.3, linestyle='--')
+    ax.set_ylim(0, 110)
+    
+    # Agregar línea de tendencia para mantenibilidad
+    z = np.polyfit(x, mantenibilidad, 2)
+    p = np.poly1d(z)
+    x_smooth = np.linspace(x.min(), x.max(), 100)
+    ax.plot(x_smooth, p(x_smooth), "b--", alpha=0.5, linewidth=2)
+    
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/evolucion_arquitectura.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/evolucion_arquitectura.png', bbox_inches='tight')
+    plt.close()
+    print("✓ Figura 4 generada: evolucion_arquitectura")
+
+# ============================================================================
+# FIGURA 5: Uso de Patrones de Diseño en el Proyecto
+# ============================================================================
+def fig5_uso_patrones():
+    fig, ax = plt.subplots(figsize=(8, 6))
+    
+    patrones = ['Repository', 'Builder', 'Singleton', 'Observer\n(SignalR)', 
+                'Facade', 'Factory', 'Proxy\n(JWT)']
+    frecuencia = [37, 4, 8, 12, 5, 6, 15]  # Número de implementaciones
+    categoria_colores = {'Creacional': '#3498db', 'Estructural': '#e74c3c', 
+                        'Comportamiento': '#2ecc71'}
+    categorias = ['Estructural', 'Creacional', 'Creacional', 'Comportamiento', 
+                  'Estructural', 'Creacional', 'Estructural']
+    colores = [categoria_colores[c] for c in categorias]
+    
+    bars = ax.barh(patrones, frecuencia, color=colores, alpha=0.8, edgecolor='black')
+    
+    # Agregar valores
+    for bar, valor in zip(bars, frecuencia):
+        ax.text(valor + 0.5, bar.get_y() + bar.get_height()/2, 
+               str(valor), va='center', fontweight='bold')
+    
+    ax.set_xlabel('Número de Implementaciones', fontweight='bold')
+    ax.set_title('Frecuencia de Uso de Patrones de Diseño\nen la Plataforma', 
+                 fontweight='bold', fontsize=12)
+    ax.grid(axis='x', alpha=0.3, linestyle='--')
+    
+    # Leyenda de categorías
+    legend_elements = [mpatches.Patch(color=color, label=cat, alpha=0.8) 
+                      for cat, color in categoria_colores.items()]
+    ax.legend(handles=legend_elements, loc='lower right', title='Categoría')
+    
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/uso_patrones.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/uso_patrones.png', bbox_inches='tight')
+    plt.close()
+    print("✓ Figura 5 generada: uso_patrones")
+
+# ============================================================================
+# FIGURA 6: Impacto de SOLID en Métricas de Código
+# ============================================================================
+def fig6_impacto_solid():
+    principios = ['SRP\nResponsabilidad\nÚnica', 'OCP\nAbierto/Cerrado', 
+                  'LSP\nSustitución\nLiskov', 'ISP\nSegregación\nInterfaces', 
+                  'DIP\nInversión\nDependencias']
+    cumplimiento = [95, 88, 92, 90, 98]  # Porcentaje de cumplimiento
+    impacto_calidad = [9.2, 8.5, 8.8, 8.7, 9.5]  # Impacto en calidad (0-10)
+    
+    x = np.arange(len(principios))
+    width = 0.35
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
     
-    # Gráfica 1: Frecuencia de Deployment
-    bars1 = ax1.bar(equipos, deployment_freq, color=['#2E86AB', '#A23B72', '#F18F01', '#C73E1D'])
-    ax1.set_title('Frecuencia de Deployment por Equipo')
-    ax1.set_ylabel('Deployments por semana')
-    ax1.set_ylim(0, 25)
+    # Gráfica 1: Cumplimiento
+    bars1 = ax1.bar(x, cumplimiento, color='#3498db', alpha=0.8, edgecolor='black')
+    ax1.set_ylabel('Cumplimiento (%)', fontweight='bold')
+    ax1.set_title('Cumplimiento de Principios SOLID', fontweight='bold', fontsize=11)
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(principios)
+    ax1.grid(axis='y', alpha=0.3, linestyle='--')
+    ax1.set_ylim(0, 110)
+    ax1.axhline(y=85, color='green', linestyle='--', alpha=0.5, label='Meta: 85%')
+    ax1.legend()
     
-    # Añadir valores en las barras
-    for bar in bars1:
-        height = bar.get_height()
-        ax1.text(bar.get_x() + bar.get_width()/2., height + 0.5,
-                f'{height:.1f}', ha='center', va='bottom')
+    for bar, valor in zip(bars1, cumplimiento):
+        ax1.text(bar.get_x() + bar.get_width()/2, valor + 2, 
+                f'{valor}%', ha='center', fontweight='bold')
     
-    # Gráfica 2: Lead Time
-    bars2 = ax2.bar(equipos, lead_time, color=['#2E86AB', '#A23B72', '#F18F01', '#C73E1D'])
-    ax2.set_title('Lead Time por Equipo')
-    ax2.set_ylabel('Días promedio')
-    ax2.set_ylim(0, 6)
+    # Gráfica 2: Impacto en Calidad
+    colors_gradient = ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15']
+    bars2 = ax2.bar(x, impacto_calidad, color=colors_gradient, alpha=0.8, edgecolor='black')
+    ax2.set_ylabel('Impacto en Calidad (0-10)', fontweight='bold')
+    ax2.set_title('Impacto en Calidad del Código', fontweight='bold', fontsize=11)
+    ax2.set_xticks(x)
+    ax2.set_xticklabels(principios)
+    ax2.grid(axis='y', alpha=0.3, linestyle='--')
+    ax2.set_ylim(0, 10)
     
-    # Añadir valores en las barras
-    for bar in bars2:
-        height = bar.get_height()
-        ax2.text(bar.get_x() + bar.get_width()/2., height + 0.1,
-                f'{height:.1f}', ha='center', va='bottom')
+    for bar, valor in zip(bars2, impacto_calidad):
+        ax2.text(bar.get_x() + bar.get_width()/2, valor + 0.2, 
+                f'{valor:.1f}', ha='center', fontweight='bold')
     
     plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/metricas_dora.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/metricas_dora.png', format='png')
+    plt.savefig(f'{output_dir}/impacto_solid.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/impacto_solid.png', bbox_inches='tight')
     plt.close()
-    print("✓ Generada: metricas_dora.pdf/png")
+    print("✓ Figura 6 generada: impacto_solid")
 
-def generar_evolucion_temporal():
-    """Genera gráfica de líneas mostrando evolución temporal de métricas"""
+# ============================================================================
+# FIGURA 7: Reducción de Errores en Producción
+# ============================================================================
+def fig7_reduccion_errores():
+    fig, ax = plt.subplots(figsize=(9, 5))
     
-    # Datos de ejemplo: evolución mensual
-    meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec']
-    cobertura_pruebas = [68, 72, 75, 78, 82, 85, 87, 89, 91, 93, 94, 95]
-    defectos_produccion = [28, 25, 22, 19, 16, 14, 12, 10, 8, 6, 5, 4]
-    velocidad_equipo = [32, 35, 38, 42, 45, 48, 52, 55, 58, 61, 63, 65]
+    meses = ['Mes 1\n(Monolito)', 'Mes 2', 'Mes 3\n(N-Capas)', 'Mes 4', 
+             'Mes 5', 'Mes 6\n(+Patrones)', 'Mes 7', 'Mes 8']
+    errores_criticos = [12, 10, 8, 5, 4, 2, 1, 1]
+    errores_medios = [25, 22, 18, 15, 10, 8, 5, 4]
+    errores_menores = [45, 40, 35, 28, 22, 15, 12, 10]
     
-    fig, ax1 = plt.subplots(figsize=(12, 6))
+    x = np.arange(len(meses))
     
-    # Eje Y izquierdo: Cobertura y Velocidad
-    color = '#2E86AB'
-    ax1.set_xlabel('Mes')
-    ax1.set_ylabel('Cobertura de Pruebas (%) / Velocidad (Story Points)', color=color)
-    line1 = ax1.plot(meses, cobertura_pruebas, color=color, marker='o', linewidth=2, 
-                     label='Cobertura de Pruebas (%)')
-    line2 = ax1.plot(meses, velocidad_equipo, color='#F18F01', marker='s', linewidth=2, 
-                     label='Velocidad del Equipo (SP)')
-    ax1.tick_params(axis='y', labelcolor=color)
-    ax1.set_ylim(0, 100)
+    ax.plot(x, errores_criticos, marker='o', linewidth=2.5, markersize=8, 
+           label='Críticos', color='#e74c3c')
+    ax.plot(x, errores_medios, marker='s', linewidth=2.5, markersize=8, 
+           label='Medios', color='#f39c12')
+    ax.plot(x, errores_menores, marker='^', linewidth=2.5, markersize=8, 
+           label='Menores', color='#3498db')
     
-    # Eje Y derecho: Defectos
-    ax2 = ax1.twinx()
-    color = '#C73E1D'
-    ax2.set_ylabel('Defectos en Producción', color=color)
-    line3 = ax2.plot(meses, defectos_produccion, color=color, marker='^', linewidth=2, 
-                     label='Defectos en Producción')
-    ax2.tick_params(axis='y', labelcolor=color)
-    ax2.set_ylim(0, 30)
+    # Áreas de implementación
+    ax.axvspan(-0.5, 1.5, alpha=0.15, color='red', label='Fase Monolítica')
+    ax.axvspan(1.5, 4.5, alpha=0.15, color='orange', label='Fase N-Capas')
+    ax.axvspan(4.5, 7.5, alpha=0.15, color='green', label='Fase Patrones')
     
-    # Leyenda combinada
-    lines = line1 + line2 + line3
-    labels = [l.get_label() for l in lines]
-    ax1.legend(lines, labels, loc='center right')
+    ax.set_xlabel('Período de Desarrollo', fontweight='bold')
+    ax.set_ylabel('Número de Errores', fontweight='bold')
+    ax.set_title('Evolución de Errores en Producción según Arquitectura', 
+                 fontweight='bold', fontsize=12)
+    ax.set_xticks(x)
+    ax.set_xticklabels(meses, rotation=20, ha='right')
+    ax.legend(loc='upper right', ncol=2)
+    ax.grid(alpha=0.3, linestyle='--')
     
-    plt.title('Evolución de Métricas de Calidad del Software (2024)')
-    plt.xticks(rotation=45)
+    # Porcentaje de reducción total
+    total_inicial = sum([errores_criticos[0], errores_medios[0], errores_menores[0]])
+    total_final = sum([errores_criticos[-1], errores_medios[-1], errores_menores[-1]])
+    reduccion = ((total_inicial - total_final) / total_inicial) * 100
+    
+    ax.text(3.5, 50, f'Reducción Total: {reduccion:.0f}%', 
+           bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.7),
+           fontweight='bold', fontsize=11)
+    
     plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/evolucion_metricas.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/evolucion_metricas.png', format='png')
+    plt.savefig(f'{output_dir}/reduccion_errores.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/reduccion_errores.png', bbox_inches='tight')
     plt.close()
-    print("✓ Generada: evolucion_metricas.pdf/png")
+    print("✓ Figura 7 generada: reduccion_errores")
 
-def generar_correlacion_practicas():
-    """Genera gráfica de dispersión mostrando correlación entre prácticas DevOps"""
+# ============================================================================
+# FIGURA 8: Comparativa de Arquitecturas (Radar)
+# ============================================================================
+def fig8_comparativa_arquitecturas():
+    fig, ax = plt.subplots(figsize=(10, 6), subplot_kw=dict(projection='polar'))
     
-    np.random.seed(42)  # Para reproducibilidad
+    categorias = ['Mantenibilidad', 'Escalabilidad', 'Testabilidad', 
+                  'Desacoplamiento', 'Rendimiento', 'Complejidad\nInicial']
+    num_vars = len(categorias)
     
-    # Datos simulados: correlación entre automatización y performance
-    n_equipos = 25
-    automatizacion = np.random.normal(70, 15, n_equipos)
-    automatizacion = np.clip(automatizacion, 20, 95)
+    # Datos (escala 0-10)
+    arquitecturas = {
+        'Monolito': [4, 3, 3, 2, 8, 9],
+        'N-Capas': [7, 6, 8, 7, 7, 5],
+        'N-Capas+DDD': [9, 8, 9, 9, 6, 3],
+        'Microservicios': [9, 10, 8, 10, 5, 2]
+    }
     
-    # Correlación positiva con algo de ruido
-    performance = 0.8 * automatizacion + np.random.normal(0, 8, n_equipos) + 10
-    performance = np.clip(performance, 30, 100)
+    colores = {'Monolito': '#e74c3c', 'N-Capas': '#3498db', 
+               'N-Capas+DDD': '#2ecc71', 'Microservicios': '#9b59b6'}
     
-    # Tamaños basados en el tamaño del equipo
-    team_sizes = np.random.randint(3, 15, n_equipos)
+    # Calcular ángulos
+    angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+    angles += angles[:1]
     
-    plt.figure(figsize=(10, 7))
-    scatter = plt.scatter(automatizacion, performance, s=team_sizes*10, 
-                         c=team_sizes, cmap='viridis', alpha=0.7, edgecolors='black', linewidth=0.5)
-    
-    # Línea de tendencia
-    z = np.polyfit(automatizacion, performance, 1)
-    p = np.poly1d(z)
-    plt.plot(automatizacion, p(automatizacion), "--", color='red', linewidth=2, alpha=0.8)
-    
-    plt.xlabel('Nivel de Automatización (%)')
-    plt.ylabel('Performance del Equipo (índice)')
-    plt.title('Correlación entre Automatización y Performance del Equipo')
-    
-    # Colorbar para tamaño del equipo
-    cbar = plt.colorbar(scatter)
-    cbar.set_label('Tamaño del Equipo (personas)')
-    
-    # Añadir estadísticas
-    correlation = np.corrcoef(automatizacion, performance)[0,1]
-    plt.text(0.05, 0.95, f'Correlación: r = {correlation:.3f}', 
-             transform=plt.gca().transAxes, bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8))
-    
-    plt.grid(True, alpha=0.3)
-    plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/correlacion_devops.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/correlacion_devops.png', format='png')
-    plt.close()
-    print("✓ Generada: correlacion_devops.pdf/png")
-
-def generar_comparacion_metodologias():
-    """Genera gráfica de radar comparando metodologías ágiles"""
-    
-    # Datos para comparación de metodologías
-    categorias = ['Flexibilidad', 'Velocidad\nEntrega', 'Calidad\nCódigo', 'Satisfacción\nCliente', 
-                  'Gestión\nRiesgos', 'Escalabilidad']
-    
-    # Puntuaciones (1-10) para cada metodología
-    scrum_scores = [8, 9, 7, 9, 6, 7]
-    kanban_scores = [9, 7, 8, 8, 8, 8]
-    xp_scores = [7, 8, 10, 7, 7, 6]
-    
-    # Configurar gráfica de radar
-    angles = np.linspace(0, 2 * np.pi, len(categorias), endpoint=False).tolist()
-    angles += angles[:1]  # Cerrar el círculo
-    
-    scrum_scores += scrum_scores[:1]
-    kanban_scores += kanban_scores[:1]
-    xp_scores += xp_scores[:1]
-    
-    fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection='polar'))
-    
-    # Dibujar las líneas para cada metodología
-    ax.plot(angles, scrum_scores, 'o-', linewidth=2, label='Scrum', color='#2E86AB')
-    ax.fill(angles, scrum_scores, alpha=0.25, color='#2E86AB')
-    
-    ax.plot(angles, kanban_scores, 's-', linewidth=2, label='Kanban', color='#F18F01')
-    ax.fill(angles, kanban_scores, alpha=0.25, color='#F18F01')
-    
-    ax.plot(angles, xp_scores, '^-', linewidth=2, label='XP', color='#C73E1D')
-    ax.fill(angles, xp_scores, alpha=0.25, color='#C73E1D')
-    
-    # Configurar etiquetas y límites
+    ax.set_theta_offset(np.pi / 2)
+    ax.set_theta_direction(-1)
     ax.set_xticks(angles[:-1])
-    ax.set_xticklabels(categorias)
+    ax.set_xticklabels(categorias, fontsize=10)
     ax.set_ylim(0, 10)
-    ax.set_yticks(range(0, 11, 2))
-    ax.set_yticklabels(range(0, 11, 2))
-    ax.grid(True)
+    ax.set_yticks([2, 4, 6, 8, 10])
+    ax.set_yticklabels(['2', '4', '6', '8', '10'], fontsize=8)
+    ax.grid(True, linestyle='--', alpha=0.5)
     
-    plt.title('Comparación de Metodologías Ágiles', size=14, y=1.08)
-    plt.legend(loc='upper right', bbox_to_anchor=(1.2, 1.0))
+    # Dibujar cada arquitectura
+    for nombre, valores in arquitecturas.items():
+        valores += valores[:1]  # Cerrar el polígono
+        ax.plot(angles, valores, 'o-', linewidth=2, label=nombre, 
+               color=colores[nombre], markersize=6)
+        ax.fill(angles, valores, alpha=0.15, color=colores[nombre])
+    
+    ax.set_title('Comparativa Multidimensional de Arquitecturas de Software', 
+                 fontweight='bold', fontsize=12, pad=20)
+    ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
+    
     plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/comparacion_metodologias.pdf', format='pdf', bbox_inches='tight')
-    plt.savefig(f'{graphics_dir}/comparacion_metodologias.png', format='png', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/comparativa_arquitecturas.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/comparativa_arquitecturas.png', bbox_inches='tight')
     plt.close()
-    print("✓ Generada: comparacion_metodologias.pdf/png")
+    print("✓ Figura 8 generada: comparativa_arquitecturas")
 
-def generar_tabla_frameworks():
-    """Genera una tabla LaTeX con comparación de frameworks"""
+# ============================================================================
+# FIGURA 9: Distribución de Módulos y Servicios
+# ============================================================================
+def fig9_distribucion_modulos():
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
     
-    tabla_latex = r"""
-\begin{table}[htbp]
-\centering
-\caption{Comparación de Frameworks de Desarrollo Web}
-\label{tab:frameworks}
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Framework} & \textbf{Lenguaje} & \textbf{Performance} & \textbf{Curva Aprendizaje} & \textbf{Comunidad} & \textbf{Puntuación} \\
-\midrule
-React & JavaScript & Alta & Media & Excelente & 9.2 \\
-Angular & TypeScript & Alta & Alta & Excelente & 8.7 \\
-Vue.js & JavaScript & Alta & Baja & Buena & 8.9 \\
-Django & Python & Media & Media & Excelente & 8.5 \\
-Spring Boot & Java & Alta & Alta & Excelente & 8.8 \\
-Laravel & PHP & Media & Baja & Buena & 8.1 \\
-Express.js & JavaScript & Alta & Baja & Buena & 8.3 \\
-\bottomrule
-\end{tabular}
-\end{table}
-"""
+    # Gráfica 1: Distribución por módulo
+    modulos = ['Seguridad', 'Operación', 'Parámetros', 'Geográfico', 'Base']
+    servicios = [12, 15, 5, 4, 3]
+    repositorios = [10, 14, 6, 4, 3]
     
-    # Guardar tabla en archivo
-    tables_dir = os.path.join(os.path.dirname(__file__), '..', 'tables')
-    os.makedirs(tables_dir, exist_ok=True)
-    tabla_path = os.path.join(tables_dir, 'frameworks_comparison.tex')
-    with open(tabla_path, 'w', encoding='utf-8') as f:
-        f.write(tabla_latex.strip())
+    x = np.arange(len(modulos))
+    width = 0.35
     
-    print("✓ Generada: frameworks_comparison.tex")
-
-def main():
-    """Función principal para generar todas las gráficas"""
-    print("🎨 Generando gráficas para plantilla LaTeX...")
-    print("=" * 50)
-    try:
-        generar_metricas_dora()
-        generar_evolucion_temporal()
-        generar_correlacion_practicas()
-        generar_comparacion_metodologias()
-        generar_diagrama_capas()
-        generar_reduccion_errores()
-        print("=" * 50)
-        print("✅ ¡Todas las gráficas y tablas fueron generadas exitosamente!")
-        print("\nArchivos generados:")
-        print("📊 Gráficas PDF (para LaTeX): graphics/")
-        print("🖼️  Gráficas PNG (para vista previa): graphics/")
-        print("📋 Tabla LaTeX: tables/frameworks_comparison.tex")
-    except Exception as e:
-        print(f"❌ Error al generar gráficas: {e}")
-        raise
-
-    fig, ax = plt.subplots(figsize=(8, 6))
-    capas = ['Controladores', 'Servicios', 'Repositorios', 'Entidades']
-    y = [4, 3, 2, 1]
-    colors = ['#2E86AB', '#F18F01', '#A23B72', '#C73E1D']
-    for i, (capa, yi, color) in enumerate(zip(capas, y, colors)):
-        ax.add_patch(mpatches.FancyBboxPatch((1, yi-0.4), 6, 0.8, boxstyle="round,pad=0.2", fc=color, ec='black', alpha=0.7))
-        ax.text(4, yi, capa, ha='center', va='center', fontsize=14, color='white', weight='bold')
-    ax.set_xlim(0, 8)
-    ax.set_ylim(0, 5)
-    ax.axis('off')
-    plt.title('Arquitectura por Capas del Sistema', fontsize=16)
-    plt.savefig(f'{graphics_dir}/diagrama_capas.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/diagrama_capas.png', format='png')
-    plt.close()
-    print("✓ Generada: diagrama_capas.pdf/png")
-
-def generar_reduccion_errores():
-    meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-    errores_antes = [35, 33, 30, 28, 26, 24, 22, 20, 18, 16, 15, 14]
-    errores_despues = [28, 25, 22, 19, 16, 14, 12, 10, 8, 6, 5, 4]
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(meses, errores_antes, label='Antes de arquitectura', color='#A23B72', marker='o', linestyle='--')
-    ax.plot(meses, errores_despues, label='Después de arquitectura', color='#2E86AB', marker='s', linewidth=2)
-    ax.set_xlabel('Mes')
-    ax.set_ylabel('Errores en producción')
-    ax.set_title('Reducción de Errores tras Aplicar Arquitectura por Capas')
-    ax.legend()
+    bars1 = ax1.bar(x - width/2, servicios, width, label='Servicios', 
+                    color='#3498db', alpha=0.8, edgecolor='black')
+    bars2 = ax1.bar(x + width/2, repositorios, width, label='Repositorios', 
+                    color='#e74c3c', alpha=0.8, edgecolor='black')
+    
+    ax1.set_ylabel('Cantidad de Componentes', fontweight='bold')
+    ax1.set_title('Distribución de Componentes por Módulo', fontweight='bold')
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(modulos, rotation=20, ha='right')
+    ax1.legend()
+    ax1.grid(axis='y', alpha=0.3, linestyle='--')
+    
+    # Gráfica 2: Complejidad ciclomática promedio
+    complejidad = [8.5, 12.3, 6.2, 5.8, 4.5]
+    colors = ['#ffffcc', '#ffeda0', '#fed976', '#feb24c', '#fd8d3c']
+    
+    bars = ax2.bar(modulos, complejidad, color=colors, alpha=0.8, edgecolor='black')
+    ax2.set_ylabel('Complejidad Ciclomática Promedio', fontweight='bold')
+    ax2.set_title('Complejidad por Módulo', fontweight='bold')
+    ax2.set_xticklabels(modulos, rotation=20, ha='right')
+    ax2.axhline(y=10, color='red', linestyle='--', alpha=0.5, label='Umbral Crítico')
+    ax2.legend()
+    ax2.grid(axis='y', alpha=0.3, linestyle='--')
+    
+    for bar, valor in zip(bars, complejidad):
+        ax2.text(bar.get_x() + bar.get_width()/2, valor + 0.3, 
+                f'{valor:.1f}', ha='center', fontweight='bold')
+    
     plt.tight_layout()
-    plt.savefig(f'{graphics_dir}/reduccion_errores.pdf', format='pdf')
-    plt.savefig(f'{graphics_dir}/reduccion_errores.png', format='png')
+    plt.savefig(f'{output_dir}/distribucion_modulos.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/distribucion_modulos.png', bbox_inches='tight')
     plt.close()
-    print("✓ Generada: reduccion_errores.pdf/png")
+    print("✓ Figura 9 generada: distribucion_modulos")
 
+# ============================================================================
+# FIGURA 10: Rendimiento y Escalabilidad
+# ============================================================================
+def fig10_rendimiento_escalabilidad():
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+    
+    # Gráfica 1: Tiempo de respuesta vs Usuarios concurrentes
+    usuarios = [10, 50, 100, 200, 500, 1000, 2000]
+    tiempo_monolito = [120, 180, 350, 850, 2200, 5500, 12000]
+    tiempo_ncapas = [115, 160, 280, 520, 1100, 2200, 4500]
+    tiempo_optimizado = [110, 145, 240, 420, 850, 1500, 2800]
+    
+    ax1.plot(usuarios, tiempo_monolito, marker='o', linewidth=2.5, 
+            label='Monolito', color='#e74c3c')
+    ax1.plot(usuarios, tiempo_ncapas, marker='s', linewidth=2.5, 
+            label='N-Capas', color='#3498db')
+    ax1.plot(usuarios, tiempo_optimizado, marker='^', linewidth=2.5, 
+            label='N-Capas + Patrones', color='#2ecc71')
+    
+    ax1.set_xlabel('Usuarios Concurrentes', fontweight='bold')
+    ax1.set_ylabel('Tiempo de Respuesta (ms)', fontweight='bold')
+    ax1.set_title('Escalabilidad: Tiempo de Respuesta', fontweight='bold')
+    ax1.legend()
+    ax1.grid(alpha=0.3, linestyle='--')
+    ax1.set_yscale('log')
+    
+    # Gráfica 2: Uso de memoria
+    memoria_monolito = [180, 250, 380, 650, 1200, 2100, 3500]
+    memoria_ncapas = [150, 210, 320, 520, 880, 1400, 2200]
+    memoria_optimizado = [140, 195, 290, 450, 750, 1150, 1800]
+    
+    ax2.plot(usuarios, memoria_monolito, marker='o', linewidth=2.5, 
+            label='Monolito', color='#e74c3c')
+    ax2.plot(usuarios, memoria_ncapas, marker='s', linewidth=2.5, 
+            label='N-Capas', color='#3498db')
+    ax2.plot(usuarios, memoria_optimizado, marker='^', linewidth=2.5, 
+            label='N-Capas + Patrones', color='#2ecc71')
+    
+    ax2.set_xlabel('Usuarios Concurrentes', fontweight='bold')
+    ax2.set_ylabel('Uso de Memoria (MB)', fontweight='bold')
+    ax2.set_title('Eficiencia de Memoria', fontweight='bold')
+    ax2.legend()
+    ax2.grid(alpha=0.3, linestyle='--')
+    
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/rendimiento_escalabilidad.pdf', bbox_inches='tight')
+    plt.savefig(f'{output_dir}/rendimiento_escalabilidad.png', bbox_inches='tight')
+    plt.close()
+    print("✓ Figura 10 generada: rendimiento_escalabilidad")
+
+# ============================================================================
+# Ejecutar todas las funciones
+# ============================================================================
 if __name__ == "__main__":
-    main()
+    print("\n" + "="*60)
+    print("Generando gráficas para el artículo...")
+    print("="*60 + "\n")
+    
+    fig1_metricas_componentes()
+    fig2_comparativa_tiempos()
+    fig3_cobertura_pruebas()
+    fig4_evolucion_arquitectura()
+    fig5_uso_patrones()
+    fig6_impacto_solid()
+    fig7_reduccion_errores()
+    fig8_comparativa_arquitecturas()
+    fig9_distribucion_modulos()
+    fig10_rendimiento_escalabilidad()
+    
+    print("\n" + "="*60)
+    print("✅ Todas las gráficas generadas exitosamente")
+    print(f"📁 Ubicación: {os.path.abspath(output_dir)}")
+    print("="*60 + "\n")

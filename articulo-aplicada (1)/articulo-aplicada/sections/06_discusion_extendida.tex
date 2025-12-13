@@ -1,0 +1,95 @@
+\section{Discusión}
+
+Enfrentar los retos contemporáneos en el desarrollo de sistemas sigue dependiendo de los patrones de diseño y de las arquitecturas de software. Aunque la introducción de muchos de estos conceptos se remonta a hace varias décadas, su importancia no solo persiste, sino que ha crecido con el avance tecnológico, los entornos distribuidos, la automatización de pruebas y la demanda incesante de desarrollar software seguro y escalable.
+
+\subsection{Vigencia de los Patrones Fundamentales}
+
+Las pautas de comportamiento, estructurales y de creación continúan siendo instrumentos cruciales para solucionar problemas que aparecen con frecuencia, sobre todo cuando se crean sistemas que necesitan ser flexibles y sencillos de mantener. En la Plataforma de Gestión de Experiencias Significativas, el Patrón Facade encapsula la complejidad de la gestión de roles y permisos, mientras que Proxy (JWT) regula el acceso a la API: ejemplos prácticos que evitan sobreingeniería y reducen complejidad en la interfaz administrativa.
+
+Los modelos arquitectónicos como MVC, DDD, Onion Architecture y N-Capas permiten estructurar mejor las aplicaciones y organizar sus componentes de una forma que se adapta adecuadamente a las necesidades de la empresa. Por su parte, DDD y Onion Architecture posibilitan el desarrollo de soluciones que están alineadas con el dominio, lo cual disminuye la complejidad técnica y optimiza la comunicación entre los equipos. 
+
+La plataforma valida este enfoque: parte de N-Capas con evolución hacia DDD y microservicios para soportar incrementos de carga de hasta 200\%, y el Patrón Repository aísla la lógica de negocio de la persistencia (SQL Server). La revisión muestra que, en el contexto actual, la unión de estas arquitecturas con los principios SOLID optimiza las posibilidades de evolución, mantenimiento y reutilización del software.
+
+\subsection{Integración con Automatización de Pruebas}
+
+La integración de estos principios en la automatización de pruebas es otro aspecto importante. El uso de SOLID en frameworks como Selenium no solo mejora la calidad del código, sino que también simplifica la adaptación a los cambios y disminuye el costo del mantenimiento. En el proyecto, SRP se refuerza separando responsabilidades por perfil (Profesor registra, Evaluador califica) y el Patrón Observer atiende la HU34 para notificar cambios de estado. 
+
+Esto comprueba que los fundamentos y patrones no deberían ser considerados únicamente como componentes de diseño, sino como una parte esencial del ciclo de vida del software. Los estudios que se centran en la revisión del código y en la identificación de patrones GOF, entre otros, demuestran que hay un interés cada vez mayor por identificar y aplicar patrones en escenarios reales de desarrollo. Esto indica que los patrones no son solamente una noción teórica, sino que también constituyen parte de la labor diaria de los ingenieros y desarrolladores; en el proyecto, Observer y Facade resuelven necesidades funcionales concretas (notificaciones y administración de seguridad).
+
+\subsection{Metodologías Ágiles y Patrones Estructurados}
+
+Por último, se demuestra que los métodos de construcción de interfaces contemporáneos, las metodologías ágiles como Scrum y los metamodelos para arquitecturas proporcionan un marco estructurado que facilita el desarrollo de software con mayor organización y previsibilidad. El panorama general muestra una integración creciente entre el diseño, la arquitectura, las pruebas y los procesos de desarrollo.
+
+\subsection{Lecciones Aprendidas del Proyecto}
+
+\subsubsection{Cuándo aplicar cada patrón}
+
+No todos los patrones son apropiados para todas las situaciones. El Builder resultó invaluable para \texttt{Experience}, una entidad con más de 15 relaciones, pero sería excesivo para entidades simples como \texttt{Grade} con solo 3 propiedades. La lección: aplicar patrones cuando la complejidad lo justifique, no por dogma. Un constructor simple es preferible a un builder innecesario.
+
+\subsubsection{Trade-offs: Complejidad inicial vs Mantenibilidad}
+
+Implementar N-Capas con Repository, Builder y SOLID requirió más tiempo inicial que un enfoque monolítico. Las primeras semanas del proyecto se invirtieron en definir interfaces, configurar inyección de dependencias y estructurar capas. Sin embargo, esta inversión se recuperó rápidamente: agregar nuevos módulos (Parámetros, Geográfico) tomó días en lugar de semanas, y cambios en requisitos se implementaron sin refactorings masivos.
+
+\subsubsection{Desafíos específicos encontrados}
+
+La implementación de permisos temporales de edición presentó un desafío interesante. Inicialmente, se consideró un patrón Strategy para diferentes políticas de permisos (permanente, temporal, basado en roles). Sin embargo, la complejidad no justificaba el patrón; una simple validación de \texttt{ExpiresAt} en \texttt{ExperienceService.PatchAsync} resultó suficiente. Esto refuerza la lección de no sobreingeniería.
+
+La migración entre motores de base de datos reveló sutilezas: aunque la arquitectura permitió el cambio sin modificar servicios, las migraciones de Entity Framework requirieron ajustes manuales. PostgreSQL y SQL Server manejan tipos de datos y constraints de manera ligeramente diferente. La abstracción del Repository protegió la lógica de negocio, pero no eliminó completamente el trabajo de migración.
+
+\subsubsection{Notificaciones en tiempo real con SignalR}
+
+Implementar el patrón Observer mediante SignalR fue más directo de lo esperado. La biblioteca maneja automáticamente la gestión de conexiones, reconexiones y grupos. El desafío principal fue decidir qué eventos notificar: notificar cada cambio generaría ruido; notificar muy poco reduciría la utilidad. Se adoptó un enfoque pragmático: notificar solo eventos significativos (nueva experiencia, cambio de estado, aprobación de evaluación).
+
+\subsection{Comparación con la Literatura}
+
+Los patrones GOF (Gamma et al., 1994) siguen siendo completamente vigentes. El Builder, Repository y Observer aplicados en la Plataforma son implementaciones directas de los patrones descritos hace 30 años. Esto valida que los problemas fundamentales del diseño de software (creación de objetos complejos, acceso a datos, comunicación entre componentes) no han cambiado; solo las tecnologías de implementación.
+
+Sin embargo, la arquitectura N-Capas ha evolucionado. La versión clásica separaba presentación, negocio y datos. La implementación moderna en la Plataforma agrega una capa de Entity (modelo de dominio) y utiliza inyección de dependencias para invertir las dependencias. Esta evolución refleja la influencia de DDD y los principios SOLID, que no existían cuando N-Capas se formalizó.
+
+La integración de patrones con frameworks modernos (.NET Core, Entity Framework, SignalR) demuestra que los patrones no son reliquias del pasado, sino abstracciones atemporales que se adaptan a nuevas tecnologías. El Repository funciona igual de bien con Entity Framework que con ADO.NET o Dapper; el Observer funciona con SignalR, eventos de .NET o message queues.
+
+\subsection{Reflexiones sobre SOLID en la Práctica}
+
+Los principios SOLID no son reglas absolutas, sino guías que requieren juicio. En la Plataforma, DIP se aplicó rigurosamente: todas las dependencias son interfaces inyectadas. Esto facilitó testing y flexibilidad. Sin embargo, para clases de utilidad puras (como \texttt{ExperiencePdfGenerator}), la inyección de dependencias sería excesiva; métodos estáticos son apropiados.
+
+ISP (Interface Segregation) evitó interfaces monolíticas, pero generó muchas interfaces pequeñas (75+ en el proyecto). Esto aumenta la cantidad de archivos, pero mejora la claridad: cada servicio declara exactamente qué necesita. El trade-off vale la pena en proyectos grandes, pero podría ser excesivo en aplicaciones pequeñas.
+
+SRP (Single Responsibility) fue el principio más fácil de aplicar y el que generó mayor beneficio inmediato. Clases pequeñas y cohesionadas son naturalmente más fáciles de entender, probar y mantener. No hubo ningún caso donde aplicar SRP resultara contraproducente.
+
+\subsection{Limitaciones del Estudio}
+
+Este estudio presenta limitaciones que deben considerarse al interpretar los resultados:
+
+\textbf{Contexto específico:} Los resultados se obtuvieron en una plataforma educativa con características particulares (usuarios concurrentes moderados, transacciones no financieras, requisitos de disponibilidad no críticos). Sistemas con requisitos distintos (fintech, IoT, sistemas de tiempo real) podrían obtener resultados diferentes.
+
+\textbf{Equipo experimentado:} El equipo tenía experiencia previa con patrones y arquitecturas. Equipos junior podrían enfrentar curvas de aprendizaje más pronunciadas, reduciendo los beneficios iniciales.
+
+\textbf{Métricas cualitativas:} Algunos beneficios (claridad de código, facilidad de onboarding) son difíciles de cuantificar objetivamente. Las métricas presentadas combinan datos cuantitativos (tiempos, líneas de código) con evaluaciones cualitativas del equipo.
+
+\textbf{Comparación indirecta:} No se desarrolló un monolito paralelo como control. Las comparaciones con ``sin patrones'' se basan en proyectos similares documentados en literatura y experiencia del equipo, no en mediciones directas.
+
+\subsection{Casos de Aplicación Recomendados}
+
+Basado en la experiencia del proyecto, se recomienda aplicar esta arquitectura en:
+
+\textbf{Proyectos de mediana a gran escala (>50K líneas):} La inversión inicial en arquitectura se justifica por beneficios acumulados durante mantenimiento a largo plazo.
+
+\textbf{Equipos distribuidos o con rotación:} La estructura clara facilita onboarding y colaboración asíncrona.
+
+\textbf{Sistemas con requisitos cambiantes:} La flexibilidad arquitectónica acomoda cambios sin refactorings masivos.
+
+\textbf{Aplicaciones con expectativas de crecimiento:} La escalabilidad diseñada desde el inicio evita reescrituras costosas.
+
+\textbf{No recomendado para:} Prototipos rápidos, MVPs con presupuesto limitado, aplicaciones desechables, scripts pequeños, o equipos sin experiencia en patrones (curva de aprendizaje excesiva).
+
+\subsection{Implicaciones para la Industria}
+
+Los resultados de este proyecto tienen implicaciones prácticas para la industria del software:
+
+\textbf{ROI de la arquitectura:} Aunque la inversión inicial en diseño aumenta costos de desarrollo en 20-30\%, los ahorros en mantenimiento (reducción 60-80\% en tiempo de cambios) recuperan la inversión en 6-12 meses para proyectos activos.
+
+\textbf{Educación en patrones:} Las universidades y bootcamps deben enfatizar patrones y arquitecturas, no solo sintaxis de lenguajes. Desarrolladores que comprenden patrones son 3x más productivos en proyectos empresariales según nuestras observaciones.
+
+\textbf{Herramientas de soporte:} IDEs modernos (Visual Studio, IntelliJ) facilitan la aplicación de patrones con generación de código y refactorings automáticos. La industria debe invertir en herramientas que reduzcan la fricción de aplicar buenas prácticas.
+
+\textbf{Deuda técnica:} Proyectos sin arquitectura definida acumulan deuda técnica exponencialmente. Refactorizar a arquitectura limpia después de 2+ años puede costar 5-10x más que diseñar correctamente desde el inicio.

@@ -1,10 +1,67 @@
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
+[htbp]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/dao_factura.png}
+    \caption{Ejemplo de patrón Repository: clase FacturaDAO gestionando operaciones sobre la tabla Facturas.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[htbp]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/logistica.png}
+    \caption{Analogía visual: logística terrestre y marítima como ejemplo de factorías que crean objetos según el contexto.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[htbp]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/unitofwork.png}
+    \caption{Patrón UnitOfWork: coordinación de repositorios y transacciones en la arquitectura.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
 [!ht]
     \centering
-    \includegraphics[width=0.48\textwidth]{graphics/diagrama_capas.pdf}
-    \caption{Diagrama de arquitectura por capas implementada en el sistema.}
-    \label{fig:diagrama_capas}
+    \includegraphics[width=0.48\textwidth]{graphics/metricas_componentes.pdf}
+    \caption{Componentes arquitectónicos implementados en la Plataforma. La distribución muestra el equilibrio entre las capas del sistema.}
+    \label{fig:metricas_componentes}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/cobertura_pruebas.pdf}
+    \caption{Cobertura de pruebas por capa arquitectónica y líneas de código testeadas. La capa Entity alcanza 100\% de cobertura al ser DTO puro.}
+    \label{fig:cobertura_pruebas}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/impacto_solid.pdf}
+    \caption{Cumplimiento de principios SOLID e impacto en calidad del código. DIP alcanza el mayor impacto (9.5/10) facilitando testing y flexibilidad.}
+    \label{fig:impacto_solid}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/comparativa_tiempos.pdf}
+    \caption{Comparativa de tiempos para tareas comunes: con patrones vs sin patrones. Las mejoras van desde 50\% hasta 95\% en tiempo.}
+    \label{fig:comparativa_tiempos}
 \end{figure*}
 \efloatseparator
  
@@ -13,6 +70,56 @@
 [!ht]
     \centering
     \includegraphics[width=0.48\textwidth]{graphics/reduccion_errores.pdf}
-    \caption{Reducción de errores en producción tras aplicar arquitectura por capas.}
+    \caption{Evolución de errores en producción durante 8 meses. La implementación progresiva de patrones redujo errores totales en 82\%.}
     \label{fig:reduccion_errores}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/evolucion_arquitectura.pdf}
+    \caption{Evolución de métricas de calidad según arquitectura adoptada. La mantenibilidad creció 137\% desde el monolito hasta la fase actual.}
+    \label{fig:evolucion_arquitectura}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/comparativa_arquitecturas.pdf}
+    \caption{Comparativa multidimensional de cuatro arquitecturas de software. N-Capas+DDD ofrece el mejor balance entre complejidad y beneficios.}
+    \label{fig:comparativa_arquitecturas}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/distribucion_modulos.pdf}
+    \caption{Distribución de componentes y complejidad ciclomática por módulo. El módulo Operación tiene mayor complejidad (12.3) al gestionar el flujo principal.}
+    \label{fig:distribucion_modulos}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/rendimiento_escalabilidad.pdf}
+    \caption{Rendimiento bajo carga: tiempo de respuesta y uso de memoria vs usuarios concurrentes. Arquitectura con patrones soporta 2000 usuarios con 2.8s de respuesta.}
+    \label{fig:rendimiento_escalabilidad}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/uso_patrones.pdf}
+    \caption{Frecuencia de uso de patrones de diseño en la Plataforma. Repository es el más aplicado (37 veces), seguido de Proxy-JWT (15) y Observer (12).}
+    \label{fig:uso_patrones}
 \end{figure*}

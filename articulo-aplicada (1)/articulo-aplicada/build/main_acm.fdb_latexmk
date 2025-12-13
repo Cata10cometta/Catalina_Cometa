@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex build/main_acm"] 1765224144.35063 "build/main_acm.aux" "build/main_acm.bbl" "build/main_acm" 1765224154.76111 0
+["bibtex build/main_acm"] 0 "build/main_acm.aux" "build/main_acm.bbl" "build/main_acm" 0 -1
   "./bibliography/references.bib" 1765220057.96345 2354 6c4075176a649692d71d6d829098a643 ""
   "/opt/texlive/texdir/texmf-dist/bibtex/bst/acmart/ACM-Reference-Format.bst" 1748720794 93560 12e0ced1522ea2bfa9b2fb12855c7e9e ""
-  "build/main_acm.aux" 1765224153.17944 3972 e5e436d8f81a9305b669ffa15254b4ab "xelatex"
+  "build/main_acm.aux" 1765629144.97364 15738 6cb6dff635786446ee98287f1a1f18e1 "xelatex"
   (generated)
   "build/main_acm.bbl"
   "build/main_acm.blg"
   (rewritten before read)
-["xdvipdfmx"] 1765224154.24114 "build/main_acm.xdv" "build/main_acm.pdf" "build/main_acm" 1765224154.8342 0
-  "build/main_acm.xdv" 1765224153.19624 126452 a84db747060436233685aa50d49e0d14 "xelatex"
+["xdvipdfmx"] 0 "build/main_acm.xdv" "build/main_acm.pdf" "build/main_acm" 0 -1
+  "build/main_acm.xdv" 1765629144.99968 634188 fd493d449ac8edca116a5c5eda89cfdc "xelatex"
   (generated)
   "build/main_acm.pdf"
   (rewritten before read)
-["xelatex"] 1765224144.50241 "main_acm.tex" "build/main_acm.xdv" "main_acm" 1765224154.77549 0
+["xelatex"] 1765629123.25485 "main_acm.tex" "build/main_acm.xdv" "main_acm" 1765629146.24215 2
   "/opt/texlive/texdir/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/texlive/texdir/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/opt/texlive/texdir/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -151,28 +151,38 @@
   "/opt/texlive/texdir/texmf-dist/web2c/texmf.cnf" 1749313668 42213 4e2ca030e8e2640502016e9e45868dcb ""
   "/opt/texlive/texdir/texmf-var/web2c/xetex/xelatex.fmt" 1764417923 5947043 dbcb68a071f2db705893ef5aab0e8fe7 ""
   "/opt/texlive/texdir/texmf.cnf" 1759376174 555 bd60ff59e4d560b42d96b004436f91d3 ""
-  "build/main_acm.aux" 1765224153.17944 3972 e5e436d8f81a9305b669ffa15254b4ab "xelatex"
-  "build/main_acm.bbl" 1765224144.4553 5283 2a2fc0d4ffbb27f608b29d4af5ed2a60 "bibtex build/main_acm"
-  "build/main_acm.log" 1765224153.20463 92625 d493b83af65654774b3924526649ce8e "xelatex"
-  "build/main_acm.out" 1765224153.18728 2431 8f7c830598cda66560b655b16aada6ee "xelatex"
-  "graphics/diagrama_capas.pdf" 1765222425.60883 16806 e45e4afdb7d091dde2205b1ac97f6644 ""
-  "graphics/reduccion_errores.pdf" 1765222425.3162 16933 f99dbad7de8a27b020bf83f33b368b04 ""
+  "build/main_acm.aux" 1765629144.97364 15738 6cb6dff635786446ee98287f1a1f18e1 "xelatex"
+  "build/main_acm.bbl" 0 -1 0 "bibtex build/main_acm"
+  "build/main_acm.log" 1765629145.00139 101315 5b24287c52e9bcf7f3387c159dea2ee2 "xelatex"
+  "build/main_acm.out" 1765629144.98393 8669 4502ef5295e68f61bdb8f1bdf821eb37 "xelatex"
+  "graphics/cobertura_pruebas.pdf" 1765628233.6977 26746 1af4140e67da827b9ac99c3b78857726 ""
+  "graphics/comparativa_arquitecturas.pdf" 1765628238.4365 27768 3aab4fa723d14caed3436ad6a53f53e4 ""
+  "graphics/comparativa_tiempos.pdf" 1765628233.04813 29187 d9486db6c1dd66e175ce27cf826897eb ""
+  "graphics/dao_factura.png" 1765610107.33541 16614 8f2120725985e45633669e0043476606 ""
+  "graphics/distribucion_modulos.pdf" 1765628239.2273 29570 faaed570cecb8ce01a2dfd7877cbc726 ""
+  "graphics/evolucion_arquitectura.pdf" 1765628234.29807 28377 eeaf130c0b246ddf0b7a99aec4ff2269 ""
+  "graphics/impacto_solid.pdf" 1765628236.3989 31562 fa9ec25ea7ab482bc6f6602904af1551 ""
+  "graphics/logistica.png" 1765610092.24296 43172 e7ff6734f55c39e23e356ab01c25b654 ""
+  "graphics/metricas_componentes.pdf" 1765628232.53311 25220 c727710f5abda0cc83bc5e40ca56edfe ""
+  "graphics/reduccion_errores.pdf" 1765628237.82251 27195 3ae12457712497f8f8bfe4b84df62c6c ""
+  "graphics/rendimiento_escalabilidad.pdf" 1765628240.37044 25010 6280ac6c3161a701548b06a93fb047c8 ""
+  "graphics/unitofwork.png" 1765608251.82112 109603 c2a716eac5a0312d7054ec1478094585 ""
+  "graphics/uso_patrones.pdf" 1765628234.88379 28622 a7b86370399d330e3fa183a1ca2a703f ""
   "includes/preamble_acm.tex" 1765220058.23732 118 3f1ba5b5d56dca6cd0336ca2b9c163d0 ""
-  "includes/preamble_common.tex" 1765220058.24664 1297 07518923b9f4f85072fe97d52092a43e ""
-  "main_acm.tex" 1765220057.94223 958 7bc9eef104c1d3612437f2310a8f9a48 ""
-  "sections/00_abstract.tex" 1765220058.2686 397 b54600f70bb3487475bdbdb64cc93355 ""
-  "sections/01_introduccion.tex" 1765220058.27319 992 bff692fd6116caf09021e744b2ca1f03 ""
+  "includes/preamble_common.tex" 1765628892.72174 1392 b1fc6105bff12a4846e4b754328da31f ""
+  "main_acm.tex" 1765629110.27225 1120 a2c8296442343ec30898094d2f88a855 ""
+  "sections/00_abstract_new.tex" 1765628304.76517 2600 eca1367decbcd91d318bbaed704e5730 ""
+  "sections/01_introduccion.tex" 1765607686.03499 1489 2cb1c1c4014e72f30a9208082aec70b1 ""
   "sections/02_relacionados.tex" 1765220058.27804 1360 c72ee2b533ca19e93dfaf5f1e732e8fe ""
-  "sections/03_metodologia.tex" 1765223541.77504 1303 39993ed0e25bcc4a55bca6ac8f250aa8 ""
+  "sections/03_metodologia.tex" 1765619132.66568 14142 6c7d83829b69b6cc1d4c9ac23e1a86a4 ""
   "sections/04_implementacion.tex" 1765220058.28986 1364 85e358d245dcb2f7402b94667104fac0 ""
-  "sections/05_resultados.tex" 1765223548.53876 1386 fb096651cad754a7ca5413c615275c17 ""
-  "sections/06_discusion.tex" 1765220058.3022 1161 7e8b76afe5d9c62b6640ad88a96e4034 ""
-  "sections/07_conclusiones.tex" 1765220058.30625 347 79dc998bb73309d6c05c01bbdd454479 ""
-  "sections/A1_apendices.tex" 1765220058.31383 498 b075d2900eb5d79fc7fdfa021d1f7513 ""
+  "sections/05_resultados_extendido.tex" 1765628426.12126 20982 a997d4af2428c9a5d9967b0301a78e77 ""
+  "sections/06_discusion_extendida.tex" 1765628506.87057 11581 17afe9dfa2e417adebc363ee3f1d0857 ""
+  "sections/07_conclusiones_extendidas.tex" 1765628574.89324 11122 a6ccc7c990954b560731364de523ab38 ""
+  "sections/A1_apendices.tex" 1765628970.1519 1188 7f17683d5a0e2d853fc85ea20a087039 ""
   (generated)
   "build/main_acm.aux"
   "build/main_acm.log"
   "build/main_acm.out"
   "build/main_acm.xdv"
   (rewritten before read)
-  "build/main_acm.log"

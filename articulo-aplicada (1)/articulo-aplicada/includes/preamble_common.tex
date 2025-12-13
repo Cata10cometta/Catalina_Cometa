@@ -8,6 +8,7 @@
   \usepackage{fontspec}
 \fi
 
+\usepackage{amsmath} % Cargar antes de cleveref
 \usepackage{microtype}
 \usepackage{csquotes}
 \usepackage{graphicx}
@@ -17,7 +18,7 @@
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\usepackage{cleveref}
+\usepackage{cleveref} % Debe cargarse después de amsmath y hyperref
 
 % Toggle para minted/listings
 \newif\ifminted

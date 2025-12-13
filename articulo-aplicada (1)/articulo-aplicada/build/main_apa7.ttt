@@ -1,0 +1,21 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!ht]
+\centering
+\caption{Métricas del proyecto validando la aplicación de patrones}
+\label{tab:metricas_proyecto}
+\begin{tabular}{lr}
+\toprule
+\textbf{Componente} & \textbf{Cantidad} \\
+\midrule
+Controladores (API) & 38 \\
+Servicios de negocio & 39 \\
+Repositorios de datos & 37 \\
+Entidades de dominio & 40+ \\
+Builders implementados & 4 \\
+Módulos funcionales & 5 \\
+Motores de BD soportados & 3 \\
+Interfaces definidas & 75+ \\
+\bottomrule
+\end{tabular}
+\end{table*}

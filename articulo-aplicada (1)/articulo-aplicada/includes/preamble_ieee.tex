@@ -2,5 +2,19 @@
 \usepackage[backend=biber,style=ieee]{biblatex}
 \addbibresource{bibliography/references.bib}
 
+% Fuente Times para XeLaTeX
+\ifdefined\directlua
+	% LuaLaTeX
+	\setmainfont{TeX Gyre Termes}
+\else
+	\ifdefined\XeTeXrevision
+		% XeLaTeX
+		\setmainfont{TeX Gyre Termes}
+	\else
+		% PDFLaTeX
+		\usepackage{newtxtext,newtxmath}
+	\fi
+\fi
+
 % Keywords helper
 \providecommand{\keywords}[1]{\textbf{Palabras clave: } #1}
